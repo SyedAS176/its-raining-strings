@@ -5,6 +5,37 @@
 
 #include "../src/raining.hpp"
 
-TEST_CASE( "it returns Hello World" ) {
-    REQUIRE( hello() == "Hello World!" );
+using namespace std;
+
+
+TEST_CASE("Add a business") {
+    vector<string> businesses;
+
+    addBusiness(businesses, "WalMart");
+    REQUIRE(businesses.size() == 1);
+    REQUIRE(businesses[0] == "WalMart");
+
+    addBusiness(businesses, "JC Penney");
+    REQUIRE(businesses.size() == 2);
+    REQUIRE(businesses[1] == "JC Penney");
+}
+
+TEST_CASE("Sort businesses alphabetically") {
+    vector<string> businesses = {"WalMart", "JC Penney", "Appleby's"};
+    sortBusinesses(businesses);
+
+    REQUIRE(businesses[0] == "Appleby's");
+    REQUIRE(businesses[1] == "JC Penney");
+    REQUIRE(businesses[2] == "WalMart");
+}
+
+TEST_CASE("Check shouldContinue") {
+    REQUIRE(shouldContinue("y") == true);
+    REQUIRE(shouldContinue("Y") == true);
+    REQUIRE(shouldContinue("yes") == true);
+    REQUIRE(shouldContinue("Yes") == true);
+
+    REQUIRE(shouldContinue("n") == false);
+    REQUIRE(shouldContinue("No") == false);
+    REQUIRE(shouldContinue("anything else") == false);
 }
